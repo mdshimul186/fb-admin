@@ -30,6 +30,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/styles": "^4.10.0",
+    "@tinymce/tinymce-react": "^3.9.0",
     "axios": "^0.21.0",
     "chart.js": "^2.9.3",
     "clsx": "^1.1.1",

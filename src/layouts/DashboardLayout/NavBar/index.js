@@ -42,19 +42,25 @@ const items = [
     title: 'Dashboard'
   },
   {
-    href: '/app/customers',
+    href: '/app/users',
     icon: UsersIcon,
-    title: 'Customers'
+    title: 'Users'
   },
   {
     href: '/app/categories',
     icon: ListIcon,
     title: 'Article Categories'
   },
+  
   {
     href: '/app/articles',
     icon: BookOpenIcon,
     title: 'Articles'
+  },
+  {
+    href: '/app/blogs',
+    icon: ClipboardIcon,
+    title: 'Blogs'
   },
   // {
   //   href: '/app/orders',
@@ -66,18 +72,18 @@ const items = [
     icon: UserIcon,
     title: 'Account'
   },
-  {
-    href: '/app/settings',
-    icon: SettingsIcon,
-    title: 'Settings'
-  },
+  // {
+  //   href: '/app/settings',
+  //   icon: SettingsIcon,
+  //   title: 'Settings'
+  // },
   // {
   //   href: '/login',
   //   icon: LockIcon,
   //   title: 'Login'
   // },
   {
-    href: '/register',
+    href: '/app/register',
     icon: UserPlusIcon,
     title: 'Register'
   },

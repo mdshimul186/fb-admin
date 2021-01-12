@@ -62,7 +62,7 @@ const withAuth = (AuthComponent) => {
         })
         .catch((err) => {
             this.setState({ isLoading: false });
-          Cookies.remove("boostingbd_token");
+          Cookies.remove("fb_admin_token");
           console.log(err.message);
           store.dispatch({
               type:"LOGOUT"

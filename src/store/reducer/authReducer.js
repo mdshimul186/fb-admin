@@ -30,9 +30,6 @@ const authReducer = (state=init, action)=>{
                 snack:action.payload
             }
 
-
-            
-    
         default:
             return state;
     }

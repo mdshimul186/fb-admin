@@ -13,6 +13,8 @@ import {
   TextField
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop';
 
 
 import axios from 'axios'
@@ -39,16 +41,22 @@ const useStyles = makeStyles((theme) => ({
 const CaterogyList = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
+  const [backdrop, setBackdrop] = useState(false)
 
   const [categories, setCategories] = useState([])
   const [name, setName] = useState("")
   const [edit, setEdit] = useState(null)
 
   useEffect(() => {
+    setBackdrop(true)
     axios.get("/blogcategory/getcategory")
       .then(res => {
         setCategories(res.data.blogCategory)
+        setBackdrop(false)
+      })
+      .catch(err=>{
+        setBackdrop(false)
+        err && err.response && alert(err.response.data.error)
       })
   }, [])
 
@@ -75,14 +83,17 @@ const CaterogyList = () => {
     let data ={
       name
     }
+    setBackdrop(true)
     axios.post('/blogcategory/create',data)
     .then(res=>{
       if(res.data.success){
         setCategories([...categories,res.data.blogCategory])
         handleClose()
+        setBackdrop(false)
       }
     })
     .catch(err=>{
+      setBackdrop(false)
       err && err.response && alert(err.response.data.error)
     })
   }
@@ -91,6 +102,7 @@ const CaterogyList = () => {
     let data ={
       name
     }
+    setBackdrop(true)
     axios.post('/blogcategory/edit/'+cat._id,data)
     .then(res=>{
       if(res.data.success){
@@ -99,9 +111,11 @@ const CaterogyList = () => {
         temp[index] = res.data.blogCategory
         setCategories(temp)
         handleClose()
+        setBackdrop(false)
       }
     })
     .catch(err=>{
+      setBackdrop(false)
       err && err.response && alert(err.response.data.error)
     })
   
@@ -110,6 +124,7 @@ const CaterogyList = () => {
   const handleDelete=(id)=>{
     let consent = window.confirm('Are you sure')
     if(!consent) return
+    setBackdrop(true)
     axios.delete('/blogcategory/delete/'+id)
     .then(res=>{
       if(res.data.success){
@@ -118,9 +133,11 @@ const CaterogyList = () => {
         temp.splice(index,1)
         setCategories(temp)
         handleClose()
+        setBackdrop(false)
       }
     })
     .catch(err=>{
+      setBackdrop(false)
       err && err.response && alert(err.response.data.error)
     })
   }
@@ -214,6 +231,10 @@ const CaterogyList = () => {
           </Box>
         </Container>
       </Page>
+
+      <Backdrop style={{ zIndex: "99999" }} open={backdrop}>
+        <CircularProgress color="primary" />
+      </Backdrop>
     </>
   );
 };
